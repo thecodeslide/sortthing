@@ -1,9 +1,23 @@
 .number {
-        color: blue;
-        background-color: green;
+  color: blue;
+  background-color: green;
 }
 
 .active {
-        color: blue;
-        background-color: red;
+  color: blue;
+  background-color: red;
+}
+
+.finish {
+  color: blue;
+  background-color: yellow;
+}
+
+.inline {
+  display: inline-block;
+  /*height: 80px;*/
+  /*vertical-align: sub;*/
+  vertical-align: bottom;
+  width: 20px;
+  margin: 5px;
 }
