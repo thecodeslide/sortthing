@@ -1,0 +1,9 @@
+.number {
+        color: blue;
+        background-color: green;
+}
+
+.active {
+        color: blue;
+        background-color: red;
+}
