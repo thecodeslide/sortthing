@@ -1,23 +1,39 @@
 console.log("this");
 
 function main() {
-        for(const el of document.getElementsByClassName("number")) {
-                console.log(el.textContent);
-                let size = parseInt(el.textContent) * 6 ;
-                el.setAttribute("style", "height:" + size + "px");
-        }
+        const entry = document.getElementById("submit");
+        document.getElementById("sort").addEventListener('click', sort);
+
+        entry.addEventListener('click', parseVal);
 }
 
-function toggle(pre, curr) {
-        pre.classList.toggle("number");
-        pre.classList.toggle("active");
-        curr.classList.toggle("number");
-        curr.classList.toggle("active");
+function parseVal() {
+    let input = document.getElementById('entry').value;
+    if (input.length === 0) {
+        input = "45 78 34 23 3 6 8 76 12 5 0";
+    }
+
+    for(const value of input.split(" ")) {
+        let nele = document.createElement("span");
+        nele.classList.add("number");
+        nele.classList.add("inline");
+        nele.appendChild(document.createTextNode(value));
+        document.getElementById("container").appendChild(nele);
+    }
+    setLength(document.getElementsByClassName("number"));
 }
 
-function toggleFinish(curr) {
-        curr.classList.toggle("finish");
+function setLength(input) {
+    for(const el of input) {
+        let size = parseInt(el.textContent) * 10;
+        el.setAttribute("style", "height:" + size + "px");
+    }
+}
 
+function toggle(el, names) {
+    for (const name of names) {
+        el.classList.toggle(name);
+    }
 }
 
 function sleep(ms) {
@@ -27,9 +43,8 @@ function sleep(ms) {
 async function sort() {
     let changed = true;
     let current;
-    let elems = document.getElementsByClassName("number")
-    // let elems = Array.from(document.getElementsByClassName("number"))
-    let container = document.getElementById("container")
+    const elems = document.getElementsByClassName("number")
+    const container = document.getElementById("container")
     let j = 0;
     while (changed) {
         changed = false;
@@ -39,23 +54,22 @@ async function sort() {
 
             current = elems[i];
             let previous = elems[i-1];
-            toggle(previous, current);
+            toggle(previous, ["number", "active"]);
+            toggle(current, ["number", "active"]);
 
             if (parseInt(previous.textContent) > parseInt(current.textContent)) {
-                    changed = true;
-                    // elems.splice(i - 1, 1);
-                    container.insertBefore(current, previous);
-                    // previous.remove();
+                changed = true;
+                container.insertBefore(current, previous);
             }
             i++;
             await sleep(500)
-            toggle(previous, current);
-    // container
-
+            toggle(previous, ["number", "active"]);
+            toggle(current, ["number", "active"]);
             }
-            toggleFinish(elems[elems.length - j - 1]);
-            await sleep(300);
-            toggleFinish(elems[elems.length - j - 1]);
+
+            toggle(elems[elems.length - j - 1], ["finish"]);
+            await sleep(350);
+            toggle(elems[elems.length - j - 1], ["finish"]);
         j++;
     }
 }
