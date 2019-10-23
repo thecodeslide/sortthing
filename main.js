@@ -25,8 +25,14 @@ function parseVal() {
 
 function setLength(input) {
     for(const el of input) {
-        let size = parseInt(el.textContent) * 10;
-        el.setAttribute("style", "height:" + size + "px");
+        // if(parseInt(el.textContent) < 0) {
+        //     el.classList.toggle("inline");
+        //     el.setAttribute
+        // } 
+        // else {
+                let size = parseInt(el.textContent) * 10;
+                el.setAttribute("style", "height:" + size + "px");
+            // }
     }
 }
 
@@ -45,6 +51,7 @@ async function sort() {
     let current;
     const elems = document.getElementsByClassName("number")
     const container = document.getElementById("container")
+    const display = document.getElementById("display");
     let j = 0;
     while (changed) {
         changed = false;
@@ -56,13 +63,17 @@ async function sort() {
             let previous = elems[i-1];
             toggle(previous, ["number", "active"]);
             toggle(current, ["number", "active"]);
+            
+            display.textContent = `Checking if ${previous.textContent} > ${current.textContent} and swap them if true. \n The current value of swapped = ${changed}`;
 
             if (parseInt(previous.textContent) > parseInt(current.textContent)) {
                 changed = true;
                 container.insertBefore(current, previous);
+                // Checking if 5 > 15 and swap them if that is true.
+                // The current value of swapped = true.
             }
             i++;
-            await sleep(500)
+            await sleep(1000 - document.getElementById('speed').value)
             toggle(previous, ["number", "active"]);
             toggle(current, ["number", "active"]);
             }
@@ -73,3 +84,29 @@ async function sort() {
         j++;
     }
 }
+
+// function display() {
+//     const dis = document.getElementById("display");
+//     dis.textContent = 
+// }
+
+// function changeSpeed() {
+//     document.getElementById("speed").addEventListener
+// }
+
+
+// function main() {
+//         // const entry = document.getElementById("submit");
+//         // document.getElementById("sort").addEventListener('click', sort);
+
+//         // entry.addEventListener('click', parseVal);
+//         document.getElementsByTagName("body")[0].addEventListener('click', parseClick);
+// }
+
+// function parseClick(event) {
+//     if(event.target.id === "sort") {
+//         sort();
+//     }
+//     else if(event.target.id === "submit") parseVal();
+// }
+

@@ -10,8 +10,7 @@
 
 .finish {
   color: blue;
-  background-color: yellow;
-;
+  background-color: lightskyblue;
 }
 
 .inline {
@@ -21,4 +20,8 @@
   vertical-align: bottom;
   width: 20px;
   margin: 5px;
+}
+
+#display {
+  background-color: #F9C546;
 }
