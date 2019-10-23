@@ -25,14 +25,8 @@ function parseVal() {
 
 function setLength(input) {
     for(const el of input) {
-        // if(parseInt(el.textContent) < 0) {
-        //     el.classList.toggle("inline");
-        //     el.setAttribute
-        // } 
-        // else {
                 let size = parseInt(el.textContent) * 10;
                 el.setAttribute("style", "height:" + size + "px");
-            // }
     }
 }
 
@@ -69,8 +63,6 @@ async function sort() {
             if (parseInt(previous.textContent) > parseInt(current.textContent)) {
                 changed = true;
                 container.insertBefore(current, previous);
-                // Checking if 5 > 15 and swap them if that is true.
-                // The current value of swapped = true.
             }
             i++;
             await sleep(1000 - document.getElementById('speed').value)
@@ -84,16 +76,6 @@ async function sort() {
         j++;
     }
 }
-
-// function display() {
-//     const dis = document.getElementById("display");
-//     dis.textContent = 
-// }
-
-// function changeSpeed() {
-//     document.getElementById("speed").addEventListener
-// }
-
 
 // function main() {
 //         // const entry = document.getElementById("submit");
